@@ -1,35 +1,91 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import SignInModal from './SignInModal';
 
 function NavBar() {
+  const [user, setUser] = useState(null);
+  const [showSignIn, setShowSignIn] = useState(false);
+
+  const handleSignIn = (email) => {
+    setUser({ email });
+  };
+
+  const handleSignOut = () => {
+    setUser(null);
+  };
   return (
-    <nav className="bg-white shadow-lg border-b border-gray-100 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-            <span className="text-3xl">🐾</span>
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+    <nav style={{ backgroundColor: 'white', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', borderBottom: '1px solid #f3f4f6', position: 'sticky', top: 0, zIndex: 50 }}>
+      <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '4rem' }}>
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', transition: 'opacity 0.3s' }}>
+            <span style={{ fontSize: '1.5rem' }}>🐾</span>
+            <span style={{ fontSize: '1.25rem', fontWeight: 'bold', background: 'linear-gradient(to right, #2563eb, #9333ea)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               Paw Adoption
             </span>
           </Link>
           
-          <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</Link>
-            <Link to="/adopt" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">Adopt</Link>
-            <Link to="/give-up-pet" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">Surrender</Link>
-            <Link to="/contact" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">Contact</Link>
-            <button className="btn-primary">Sign In</button>
-          </div>
-          
-          <div className="md:hidden">
-            <button className="text-gray-700 hover:text-blue-600">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+            <Link 
+              to="/" 
+              style={{ color: '#374151', textDecoration: 'none', fontWeight: '500', transition: 'color 0.3s' }}
+              onMouseEnter={(e) => e.target.style.color = '#2563eb'}
+              onMouseLeave={(e) => e.target.style.color = '#374151'}
+            >
+              Home
+            </Link>
+            <Link 
+              to="/adopt" 
+              style={{ color: '#374151', textDecoration: 'none', fontWeight: '500', transition: 'color 0.3s' }}
+              onMouseEnter={(e) => e.target.style.color = '#2563eb'}
+              onMouseLeave={(e) => e.target.style.color = '#374151'}
+            >
+              Adopt
+            </Link>
+            <Link 
+              to="/give-up-pet" 
+              style={{ color: '#374151', textDecoration: 'none', fontWeight: '500', transition: 'color 0.3s' }}
+              onMouseEnter={(e) => e.target.style.color = '#2563eb'}
+              onMouseLeave={(e) => e.target.style.color = '#374151'}
+            >
+              Surrender
+            </Link>
+            <Link 
+              to="/contact" 
+              style={{ color: '#374151', textDecoration: 'none', fontWeight: '500', transition: 'color 0.3s' }}
+              onMouseEnter={(e) => e.target.style.color = '#2563eb'}
+              onMouseLeave={(e) => e.target.style.color = '#374151'}
+            >
+              Contact
+            </Link>
+            {user ? (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <span style={{ fontSize: '0.875rem', color: '#374151' }}>Welcome, {user.email.split('@')[0]}</span>
+                <button 
+                  onClick={handleSignOut}
+                  className="btn-secondary" 
+                  style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <button 
+                onClick={() => setShowSignIn(true)}
+                className="btn-primary" 
+                style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}
+              >
+                Sign In
+              </button>
+            )}
           </div>
         </div>
       </div>
+      
+      <SignInModal 
+        isOpen={showSignIn}
+        onClose={() => setShowSignIn(false)}
+        onSignIn={handleSignIn}
+      />
     </nav>
   );
 }

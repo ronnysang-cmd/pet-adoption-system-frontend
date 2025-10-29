@@ -1,0 +1,149 @@
+{
+  "pets": [
+    {
+      "id": "1",
+      "name": "Buddy",
+      "breed": "Golden Retriever",
+      "age": 3,
+      "type": "dog",
+      "description": "Friendly and energetic dog who loves playing fetch and going on walks. Great with kids and other pets.",
+      "image": "https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=300&fit=crop",
+      "status": "available",
+      "gender": "male",
+      "size": "large",
+      "vaccinated": true,
+      "neutered": true
+    },
+    {
+      "id": "2",
+      "name": "Luna",
+      "breed": "Persian",
+      "age": 2,
+      "type": "cat",
+      "description": "Calm and affectionate cat who enjoys quiet moments and gentle pets. Perfect for apartment living.",
+      "image": "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=300&fit=crop",
+      "status": "available",
+      "gender": "female",
+      "size": "medium",
+      "vaccinated": true,
+      "neutered": true
+    },
+    {
+      "id": "3",
+      "name": "Max",
+      "breed": "Labrador Mix",
+      "age": 4,
+      "type": "dog",
+      "description": "Loyal companion who is great with kids and other pets. Loves swimming and outdoor activities.",
+      "image": "https://images.unsplash.com/photo-1551717743-49959800b1f6?w=400&h=300&fit=crop",
+      "status": "available",
+      "gender": "male",
+      "size": "large",
+      "vaccinated": true,
+      "neutered": true
+    },
+    {
+      "id": "4",
+      "name": "Whiskers",
+      "breed": "Tabby",
+      "age": 1,
+      "type": "cat",
+      "description": "Playful kitten who loves toys and exploring new places. Very social and loves attention.",
+      "image": "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400&h=300&fit=crop",
+      "status": "available",
+      "gender": "male",
+      "size": "small",
+      "vaccinated": true,
+      "neutered": false
+    },
+    {
+      "id": "5",
+      "name": "Bella",
+      "breed": "Siamese",
+      "age": 3,
+      "type": "cat",
+      "description": "Elegant and intelligent cat with beautiful blue eyes. Loves to talk and interact with humans.",
+      "image": "https://images.unsplash.com/photo-1606214174585-fe31582cd22c?w=400&h=300&fit=crop",
+      "status": "available",
+      "gender": "female",
+      "size": "medium",
+      "vaccinated": true,
+      "neutered": true
+    },
+    {
+      "id": "6",
+      "name": "Charlie",
+      "breed": "Beagle",
+      "age": 2,
+      "type": "dog",
+      "description": "Gentle and friendly beagle who loves sniffing around and going on adventures. Great family dog.",
+      "image": "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?w=400&h=300&fit=crop",
+      "status": "available",
+      "gender": "male",
+      "size": "medium",
+      "vaccinated": true,
+      "neutered": true
+    }
+  ],
+  "applications": [
+    {
+      "id": "1",
+      "petId": 1,
+      "applicantName": "John Doe",
+      "email": "john@example.com",
+      "phone": "555-0123",
+      "address": "123 Main St, City, State",
+      "experience": "I've had dogs for 10 years",
+      "reason": "Looking for a companion for my family",
+      "status": "pending",
+      "submittedAt": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": "fe72",
+      "petId": "1",
+      "applicantName": "ronny sang",
+      "email": "Ronnysang46@gmail.com",
+      "phone": "0748710605",
+      "address": "123chicago",
+      "experience": "they are human medicine",
+      "reason": "I am bored and I want company",
+      "status": "pending",
+      "submittedAt": "2025-10-24T16:43:29.953Z"
+    }
+  ],
+  "surrenders": [
+    {
+      "id": "1",
+      "petName": "Rocky",
+      "petType": "dog",
+      "breed": "German Shepherd",
+      "age": "5",
+      "reason": "Moving to apartment that doesn't allow pets",
+      "ownerName": "Jane Smith",
+      "email": "jane@example.com",
+      "phone": "555-0456",
+      "status": "pending",
+      "submittedAt": "2024-01-14T14:20:00Z"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "1",
+      "name": "Alice Johnson",
+      "email": "alice@example.com",
+      "subject": "Adoption Process Question",
+      "message": "Hi, I'd like to know more about the adoption process for cats.",
+      "status": "new",
+      "submittedAt": "2024-01-16T09:15:00Z"
+    },
+    {
+      "id": "a62e",
+      "name": "ronny sang",
+      "email": "Ronnysang46@gmail.com",
+      "subject": "purchase",
+      "message": "how much do you sell each pet",
+      "status": "new",
+      "submittedAt": "2025-10-24T16:37:06.641Z"
+    }
+  ]
+}

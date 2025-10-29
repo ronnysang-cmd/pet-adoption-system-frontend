@@ -1,97 +1,107 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PetCard from '../components/PetCard';
+import { petAPI } from '../services/api';
 
 function Adopt() {
   const [selectedType, setSelectedType] = useState('all');
+  const [pets, setPets] = useState([]);
+  const [loading, setLoading] = useState(true);
   
-  // Sample pet data
-  const pets = [
-    {
-      id: 1,
-      name: 'Buddy',
-      breed: 'Golden Retriever',
-      age: 3,
-      type: 'dog',
-      description: 'Friendly and energetic dog who loves playing fetch and going on walks.',
-      image: '/api/placeholder/300/250'
-    },
-    {
-      id: 2,
-      name: 'Luna',
-      breed: 'Persian',
-      age: 2,
-      type: 'cat',
-      description: 'Calm and affectionate cat who enjoys quiet moments and gentle pets.',
-      image: '/api/placeholder/300/250'
-    },
-    {
-      id: 3,
-      name: 'Max',
-      breed: 'Labrador Mix',
-      age: 4,
-      type: 'dog',
-      description: 'Loyal companion who is great with kids and other pets.',
-      image: '/api/placeholder/300/250'
-    },
-    {
-      id: 4,
-      name: 'Whiskers',
-      breed: 'Tabby',
-      age: 1,
-      type: 'cat',
-      description: 'Playful kitten who loves toys and exploring new places.',
-      image: '/api/placeholder/300/250'
-    }
-  ];
+  useEffect(() => {
+    const fetchPets = async () => {
+      try {
+        const data = await petAPI.getAll();
+        setPets(data);
+      } catch (error) {
+        console.error('Error fetching pets:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchPets();
+  }, []);
   
   const filteredPets = selectedType === 'all' ? pets : pets.filter(pet => pet.type === selectedType);
   
+  if (loading) {
+    return (
+      <div style={{ minHeight: '100vh', backgroundColor: '#f9fafb', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ fontSize: '1.125rem', color: '#6b7280' }}>Loading pets...</div>
+      </div>
+    );
+  }
+  
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div style={{ minHeight: '100vh', backgroundColor: '#f9fafb', padding: '2rem 0' }}>
+      <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1rem' }}>
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <h1 style={{ fontSize: '3rem', fontWeight: 'bold', color: '#111827', marginBottom: '1rem' }}>
             Find Your Perfect
-            <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span style={{ display: 'block', background: 'linear-gradient(to right, #2563eb, #9333ea)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               Companion
             </span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p style={{ fontSize: '1.25rem', color: '#6b7280', maxWidth: '42rem', margin: '0 auto' }}>
             Browse our available pets and find your new best friend today.
           </p>
         </div>
         
         {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem', marginBottom: '2rem' }}>
           <button 
             onClick={() => setSelectedType('all')}
-            className={`px-6 py-3 rounded-full font-medium transition-all ${
-              selectedType === 'all' 
-                ? 'bg-blue-600 text-white shadow-lg' 
-                : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
-            }`}
+            style={{
+              padding: '0.75rem 1.5rem',
+              borderRadius: '9999px',
+              fontWeight: '500',
+              transition: 'all 0.3s',
+              border: 'none',
+              cursor: 'pointer',
+              ...(selectedType === 'all' 
+                ? { backgroundColor: '#2563eb', color: 'white', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }
+                : { backgroundColor: 'white', color: '#374151', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' })
+            }}
           >
             All Pets
           </button>
           <button 
             onClick={() => setSelectedType('dog')}
-            className={`flex items-center space-x-2 px-6 py-3 rounded-full font-medium transition-all ${
-              selectedType === 'dog' 
-                ? 'bg-blue-600 text-white shadow-lg' 
-                : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
-            }`}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              padding: '0.75rem 1.5rem',
+              borderRadius: '9999px',
+              fontWeight: '500',
+              transition: 'all 0.3s',
+              border: 'none',
+              cursor: 'pointer',
+              ...(selectedType === 'dog' 
+                ? { backgroundColor: '#2563eb', color: 'white', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }
+                : { backgroundColor: 'white', color: '#374151', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' })
+            }}
           >
             <span>🐶</span>
             <span>Dogs</span>
           </button>
           <button 
             onClick={() => setSelectedType('cat')}
-            className={`flex items-center space-x-2 px-6 py-3 rounded-full font-medium transition-all ${
-              selectedType === 'cat' 
-                ? 'bg-blue-600 text-white shadow-lg' 
-                : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
-            }`}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              padding: '0.75rem 1.5rem',
+              borderRadius: '9999px',
+              fontWeight: '500',
+              transition: 'all 0.3s',
+              border: 'none',
+              cursor: 'pointer',
+              ...(selectedType === 'cat' 
+                ? { backgroundColor: '#2563eb', color: 'white', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }
+                : { backgroundColor: 'white', color: '#374151', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' })
+            }}
           >
             <span>🐱</span>
             <span>Cats</span>
@@ -99,17 +109,17 @@ function Adopt() {
         </div>
         
         {/* Pet Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem', justifyItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
           {filteredPets.map(pet => (
             <PetCard key={pet.id} pet={pet} />
           ))}
         </div>
         
         {filteredPets.length === 0 && (
-          <div className="text-center py-12">
-            <div className="text-6xl mb-4">🐾</div>
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">No pets found</h3>
-            <p className="text-gray-500">Try adjusting your filters or check back later.</p>
+          <div style={{ textAlign: 'center', padding: '3rem 0' }}>
+            <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🐾</div>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: '600', color: '#374151', marginBottom: '0.5rem' }}>No pets found</h3>
+            <p style={{ color: '#6b7280' }}>Try adjusting your filters or check back later.</p>
           </div>
         )}
       </div>
